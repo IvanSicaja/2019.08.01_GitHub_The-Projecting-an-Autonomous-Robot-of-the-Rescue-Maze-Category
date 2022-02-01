@@ -1,0 +1,15 @@
+Check storage: df -h
+Check ID for SSH: ifconfig
+Install Adruino IDE: sudo apt-get install arduino
+Chech Arduinoport: ls /dev/tty*
+Settings: sudo raspi-config
+Update: sudo apt-get update
+Upgrade: sudo apt-get upgrade
+Update Fimware and all others: sudo rpi-update
+Reboot: sudo reboot
+
+IP for SSH Rescue Maze Robot: WLAN0 --> inet -->10.0.1.224
+IP for SSH Rescue Maze Robot in flat: WLAN0 --> inet -->192.168.0.30
+IP for SSH Ultimaker Camera: WLAN0 --> inet -->10.0.1.23
+Name: pi
+Password: raspberry
