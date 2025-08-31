@@ -30,7 +30,7 @@ To design a **rescue maze mobile robot** with autonomous **navigation, victim de
 - **Independent axle maneuvering**
 - **Remembering positions (encoders)**...
 
-🧠 **How It Works**  
+**🧠 How It Works**  
 The project is very complex and demands knowledge in different areas (**3D modeling, 3D printing, advanced programming skills in different languages, researching ability, expert knowledge of every electrical component working principles, image processing, cause-and-effect analysis...**)  
 The brains of the robot are **microcontroller Teensy 3.5** and **Raspberry Pi 4B**.
 
@@ -62,12 +62,12 @@ Entire robot is **3D designed** with **Fusion 360 CAD/CAM** software and **3D pr
 ### ⚠️ Note
 
 Achieving fully **autonomous drive** and **labyrinth mapping** requires extensive testing and calibration.  
-I would especially like to thank Mirko Pezo and Stjepan Mikulic for their exceptional contribution to the development of this project .
+I would especially like to thank **Mirko Pezo** and **Stjepan Mikulic** for their exceptional contribution to the development of this project .
 
-### **🔧 Tech Stack**
+### 🔧 Tech Stack
 
-Python, Convolutional Neural Network (CNN), OpenCV – Computer Vision, Pandas, TensorFlow, Keras, scikit-learn, Git, Linux, Fusion 360, 3D design, 3D printing, Arduino, Raspberry Pi, Teensy, Visual Studio Code, Turtle (Python), AI Search Algorithms (BFS, DFS, A\*)
+**Python, Convolutional Neural Network (CNN), OpenCV – Computer Vision, Pandas, TensorFlow, Keras, scikit-learn, Git, Linux, Fusion 360, 3D design, 3D printing, Arduino, Raspberry Pi, Teensy, Visual Studio Code, Turtle (Python), AI Search Algorithms (BFS, DFS, A\*)**
 
-### **📣 Hashtags Section**
+### 📣 Hashtags Section
 
-# AutonomousRobotics #RescueMaze #RoboticsEngineering #AI #ComputerVision #OCR #ObjectDetection #PathPlanning #CNN #TensorFlow #OpenCV #EmbeddedSystems #RaspberryPi #Arduino #3DPrinting #Fusion360 #Mechatronics #AutonomousNavigation #MachineLearning
+**\# #AutonomousRobotics #RescueMaze #RoboticsEngineering #AI #ComputerVision #OCR #ObjectDetection #PathPlanning #CNN #TensorFlow #OpenCV #EmbeddedSystems #RaspberryPi #Arduino #3DPrinting #Fusion360 #Mechatronics #AutonomousNavigation #MachineLearning**
