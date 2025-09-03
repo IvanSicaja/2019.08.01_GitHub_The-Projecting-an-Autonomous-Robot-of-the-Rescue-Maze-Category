@@ -1,16 +1,14 @@
 🧾 🎯 **Project Title:** **THE PROJECTING AN AUTONOMOUS ROBOT OF THE RESCUE MAZE CATEGORY**  
 📅 **Project Timeline:** **August 2019 – October 2021**  
 🎥 YouTube Demo: [Link: https://youtu.be/3sTD7d_HzC4](https://youtu.be/3sTD7d_HzC4)  
-📦 GitHub Source Code: <https://github.com/IvanSicaja/2019.08.01_The-projecting-an-autonomous-robot-of-the-rescue-maze-category>
-
+📦 GitHub Source Code: <https://github.com/IvanSicaja/2019.08.01_GitHub_The-Projecting-an-Autonomous-Robot-of-the-Rescue-Maze-Category>  
 \----------------------------------------------------------------------------------------------------------------
 
 🏷️ My Personal Profiles: ⬇︎  
 🎥 Video Portfolio: To be added  
 📦 GitHub Profile: <https://github.com/IvanSicaja>  
 🔗 LinkedIn: <https://www.linkedin.com/in/ivan-si%C4%8Daja-832682222>  
-🎥 YouTube: <https://www.youtube.com/@ivan_sicaja>
-
+🎥 YouTube: <https://www.youtube.com/@ivan_sicaja>  
 \----------------------------------------------------------------------------------------------------------------
 
 ### 📚🔍 Project description: ⬇︎⬇︎⬇︎
