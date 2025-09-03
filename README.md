@@ -112,6 +112,13 @@ I would especially like to thank **Mirko Pezo** and **Stjepan Mikulic** for thei
        height="360">
 </p>
 
+<p align="center">
+  <img src="https://github.com/IvanSicaja/2019.08.01_GitHub_The-Projecting-an-Autonomous-Robot-of-the-Rescue-Maze-Category/blob/main/0.1_GitHub/1.0_Description_4_media_key_messages_%26_captions/2.0_Thumbnail_7.png?raw=true" 
+       alt="Rescue Maze Robot Preview 6" 
+       width="640" 
+       height="360">
+</p>
+
 ---
 
 ### 🎥 Video Demonstration
@@ -126,6 +133,7 @@ I would especially like to thank **Mirko Pezo** and **Stjepan Mikulic** for thei
 </p>
 
 ---
+
 
 ### 📣 Hashtags Section
 
