@@ -66,6 +66,67 @@ I would especially like to thank **Mirko Pezo** and **Stjepan Mikulic** for thei
 
 **Python, Convolutional Neural Network (CNN), OpenCV – Computer Vision, Pandas, TensorFlow, Keras, scikit-learn, Git, Linux, Fusion 360, 3D design, 3D printing, Arduino, Raspberry Pi, Teensy, Visual Studio Code, Turtle (Python), AI Search Algorithms (BFS, DFS, A\*)**
 
+---
+
+### 📸 Project Snapshot
+
+<p align="center">
+  <img src="https://github.com/IvanSicaja/2019.08.01_GitHub_The-Projecting-an-Autonomous-Robot-of-the-Rescue-Maze-Category/blob/main/0.1_GitHub/1.0_Description_4_media_key_messages_%26_captions/2.0_Thumbnail_1.png?raw=true" 
+       alt="Rescue Maze Robot Preview 1" 
+       width="640" 
+       height="360">
+</p>
+
+<p align="center">
+  <img src="https://github.com/IvanSicaja/2019.08.01_GitHub_The-Projecting-an-Autonomous-Robot-of-the-Rescue-Maze-Category/blob/main/0.1_GitHub/1.0_Description_4_media_key_messages_%26_captions/2.0_Thumbnail_2.png?raw=true" 
+       alt="Rescue Maze Robot Preview 2" 
+       width="640" 
+       height="360">
+</p>
+
+<p align="center">
+  <img src="https://github.com/IvanSicaja/2019.08.01_GitHub_The-Projecting-an-Autonomous-Robot-of-the-Rescue-Maze-Category/blob/main/0.1_GitHub/1.0_Description_4_media_key_messages_%26_captions/2.0_Thumbnail_3.png?raw=true" 
+       alt="Rescue Maze Robot Preview 3" 
+       width="640" 
+       height="360">
+</p>
+
+<p align="center">
+  <img src="https://github.com/IvanSicaja/2019.08.01_GitHub_The-Projecting-an-Autonomous-Robot-of-the-Rescue-Maze-Category/blob/main/0.1_GitHub/1.0_Description_4_media_key_messages_%26_captions/2.0_Thumbnail_4.png?raw=true" 
+       alt="Rescue Maze Robot Preview 4" 
+       width="640" 
+       height="360">
+</p>
+
+<p align="center">
+  <img src="https://github.com/IvanSicaja/2019.08.01_GitHub_The-Projecting-an-Autonomous-Robot-of-the-Rescue-Maze-Category/blob/main/0.1_GitHub/1.0_Description_4_media_key_messages_%26_captions/2.0_Thumbnail_5.png?raw=true" 
+       alt="Rescue Maze Robot Preview 5" 
+       width="640" 
+       height="360">
+</p>
+
+<p align="center">
+  <img src="https://github.com/IvanSicaja/2019.08.01_GitHub_The-Projecting-an-Autonomous-Robot-of-the-Rescue-Maze-Category/blob/main/0.1_GitHub/1.0_Description_4_media_key_messages_%26_captions/2.0_Thumbnail_6.png?raw=true" 
+       alt="Rescue Maze Robot Preview 6" 
+       width="640" 
+       height="360">
+</p>
+
+---
+
+### 🎥 Video Demonstration
+
+<p align="center">
+  <a href="https://youtu.be/3sTD7d_HzC4">
+    <img src="https://img.youtube.com/vi/3sTD7d_HzC4/0.jpg" 
+         alt="Watch the demo" 
+         width="640" 
+         height="360">
+  </a>
+</p>
+
+---
+
 ### 📣 Hashtags Section
 
 **\# #AutonomousRobotics #RescueMaze #RoboticsEngineering #AI #ComputerVision #OCR #ObjectDetection #PathPlanning #CNN #TensorFlow #OpenCV #EmbeddedSystems #RaspberryPi #Arduino #3DPrinting #Fusion360 #Mechatronics #AutonomousNavigation #MachineLearning**
