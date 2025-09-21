@@ -1,0 +1,336 @@
+#include "Robot_Gibanje.h"
+
+// Object definitions
+VL53L0XsAnalog lidar; // LIDAR object
+Adafruit_BNO055 gyroscope = Adafruit_BNO055(55); // Gyroscope object
+
+
+/////////PID parameters for Go_Forward///////////////
+double Setpoint1 ; // will be the desired value
+double Input1; //
+double Output1 ; //
+bool Margina1;  // ako je prva ocitana vrijednost izmedju 0 i 180 daje true, 180-360 false
+double Kp1=5, Ki1=1.5,  Kd1=0.85;
+PID PID_Forward(&Input1, &Output1, &Setpoint1, Kp1, Ki1, Kd1, DIRECT);
+////////////////////////////////////////////////////
+/////////PID parameters for Go_Back///////////////
+double Setpoint2 ; // will be the desired value
+double Input2; //
+double Output2 ; //
+bool Margina2;  // ako je prva ocitana vrijednost izmedju 0 i 180 daje true, 180-360 false
+double Kp2=5, Ki2=1.5,  Kd2=0.85;
+PID PID_Back(&Input2, &Output2, &Setpoint2, Kp2, Ki2, Kd2, DIRECT);
+////////////////////////////////////////////////////
+
+ROBOT_GIBANJE::ROBOT_GIBANJE(){ // Constructor
+}
+ROBOT_GIBANJE::~ROBOT_GIBANJE(){ // Destructor
+}
+
+void ROBOT_GIBANJE::SetupZaSveKomponente(){
+
+        lidar.add(FORWARD_AN_PIN); // 0, Analog input Teensy pin 14, connected to LIDAR's AN input
+        lidar.add(LEFT1_AN_PIN); // 1, Analog input Teensy pin 15, connected to LIDAR's AN input
+        lidar.add(LEFT2_AN_PIN); // 2, Analog input Teensy pin 16, connected to LIDAR's AN input
+        lidar.add(RIGHT1_AN_PIN); // 3, Analog input Teensy pin 15, connected to LIDAR's AN input
+        lidar.add(RIGHT2_AN_PIN); // 4, Analog input Teensy pin 16, connected to LIDAR's AN input
+
+        pinMode(THERMAL_OUT_PIN, INPUT); // Analog input pin 50, connected to thermal sensor OUT output
+
+        PID_Forward.SetMode(AUTOMATIC);
+        PID_Forward.SetOutputLimits(-40,40);
+
+        PID_Back.SetMode(AUTOMATIC);
+        PID_Back.SetOutputLimits(-40,40);
+
+        pinMode(SPEED_MOTOR_1_PIN, OUTPUT);
+        pinMode(DIRECTION_MOTOR_1_PIN, OUTPUT);
+        pinMode(SPEED_MOTOR_2_PIN, OUTPUT);
+        pinMode(DIRECTION_MOTOR_2_PIN, OUTPUT);
+
+        pinMode(ELECTROMAGNET_PIN1, OUTPUT);
+        pinMode(ELECTROMAGNET_PIN2, OUTPUT);
+
+        if(!gyroscope.begin())
+        {
+                /* There was a problem detecting the BNO055 ... check your connections */
+                Serial.print(F("Ooops, no BNO055 detected ... Check your wiring or I2C ADDR!"));
+                while(1);
+        }
+        delay(1000);
+        gyroscope.setExtCrystalUse(true);
+
+        Serial.println("Serijska komunikacija uspostavljena");
+
+}
+
+
+
+void ROBOT_GIBANJE::SetMotorSpeedAndDirection(uint8_t SPEED_PIN, uint8_t DIRECTION_PIN, int speed_and_direction){
+
+        if((speed_and_direction >= (-100))&&(speed_and_direction <= 100)) { // speed_and_direction needs to be from -100 to 100
+                if(speed_and_direction > 0) {                             // when this number is negative motor goes forward, when negative it goes backwards
+                        speed_and_direction = map(speed_and_direction,0,100,0,255);
+                        digitalWrite(DIRECTION_PIN, LOW);
+                        analogWrite(SPEED_PIN, speed_and_direction);
+                }
+                else if(speed_and_direction < 0) {
+                        speed_and_direction = map(speed_and_direction,-100,0,0,255);
+                        digitalWrite(DIRECTION_PIN, HIGH);
+                        analogWrite(SPEED_PIN, speed_and_direction);
+                }
+                else {
+                        analogWrite(DIRECTION_PIN, 0);
+                        analogWrite(SPEED_PIN, 0);
+                }
+        }
+
+}
+
+void ROBOT_GIBANJE::Go_Forward(int speed_and_direction ){ // Default speed is maximum when you don't send any value to function
+
+        Input1 = Read_Heading();
+
+        if(Margina1)
+        {
+                if(Input1 < 361 && Input1 > 270)
+                Input1 = -360 + Input1;
+        }
+        else
+        {
+                if(Input1 > -1 && Input1 <90)
+                Input1 = 360 + Input1;
+        }
+
+        PID_Forward.Compute();//  PID_Forward.Compute();
+
+
+        SetMotorSpeedAndDirection(SPEED_MOTOR_1_PIN, DIRECTION_MOTOR_1_PIN, speed_and_direction + Output1);
+        SetMotorSpeedAndDirection(SPEED_MOTOR_2_PIN, DIRECTION_MOTOR_2_PIN, speed_and_direction - Output1);
+        // Serial.println("Go_Forward() function is called.");
+
+}
+
+
+void ROBOT_GIBANJE::Go_Back(int speed_and_direction ){ // Default speed is maximum when you don't send any value to function
+
+        Input2 = Read_Heading();
+
+        if(Margina2)
+        {
+                if(Input2 < 361 && Input2 > 270)
+                Input2 = -360 + Input2;
+        }
+        else
+        {
+                if(Input2 > -1 && Input2 <90)
+                Input2 = 360 + Input2;
+        }
+
+        PID_Back.Compute();
+
+        SetMotorSpeedAndDirection(SPEED_MOTOR_1_PIN, DIRECTION_MOTOR_1_PIN, speed_and_direction + Output2);
+        SetMotorSpeedAndDirection(SPEED_MOTOR_2_PIN, DIRECTION_MOTOR_2_PIN, speed_and_direction - Output2);
+        // Serial.println("Go_Back() function is called.");
+
+}
+
+void ROBOT_GIBANJE::Go_Left(int speed_and_direction ){ // Default speed is maximum when you don't send any value to function
+
+        SetMotorSpeedAndDirection(SPEED_MOTOR_1_PIN, DIRECTION_MOTOR_1_PIN, -speed_and_direction);
+        SetMotorSpeedAndDirection(SPEED_MOTOR_2_PIN, DIRECTION_MOTOR_2_PIN, speed_and_direction);
+        // Serial.println("Go_Left() function is called.");
+
+}
+
+void ROBOT_GIBANJE::Go_Right(int speed_and_direction ){ // Default speed is maximum when you don't send any value to function
+
+        SetMotorSpeedAndDirection(SPEED_MOTOR_1_PIN, DIRECTION_MOTOR_1_PIN, speed_and_direction);
+        SetMotorSpeedAndDirection(SPEED_MOTOR_2_PIN, DIRECTION_MOTOR_2_PIN, -speed_and_direction);
+        // Serial.println("Go_Right() function is called.");
+
+}
+
+void ROBOT_GIBANJE::Stop_Robot(){
+
+        SetMotorSpeedAndDirection(SPEED_MOTOR_1_PIN, DIRECTION_MOTOR_1_PIN, 0);
+        SetMotorSpeedAndDirection(SPEED_MOTOR_2_PIN, DIRECTION_MOTOR_2_PIN, 0);
+        // Serial.println("Stop_Robot() function is called.");
+
+}
+
+uint16_t ROBOT_GIBANJE::Read_Forward_Distance(){
+        return lidar.distance(0);
+}
+
+uint16_t ROBOT_GIBANJE::Read_Left1_Distance(){
+        return lidar.distance(1);
+}
+
+uint16_t ROBOT_GIBANJE::Read_Left2_Distance(){
+        return lidar.distance(2);
+}
+
+uint16_t ROBOT_GIBANJE::Read_Right1_Distance(){
+        return lidar.distance(3);
+}
+
+uint16_t ROBOT_GIBANJE::Read_Right2_Distance(){
+        return lidar.distance(4);
+}
+
+uint16_t ROBOT_GIBANJE::Read_Back_Distance(){
+        return lidar.distance(5);
+}
+
+void ROBOT_GIBANJE::Read_All_Distances(){
+
+        for(int i = 0; i < MAX_VL53L0XS_ANALOG; i++) {
+                Distance_Array[i] = lidar.distance(i);
+        }
+
+}
+
+void ROBOT_GIBANJE::Go_Forward_30cm(int speed_and_direction ){ // Default speed is maximum when you don't send any value to function
+
+        uint16_t first_distance = Read_Forward_Distance();
+        // Serial.println(first_distance);
+        if(first_distance > 335){
+        uint16_t allowed_error = 0; // This number can be changed to achieve correct movement
+
+        Setpoint1 = Read_Heading();
+
+        if(Setpoint1<=180)    // da li se nalazi u 1. i 4. kvadrantu ili 2. i 3. kvadrantu
+              {
+               Margina1 = true;
+              }
+              else
+              Margina1 = false;
+
+
+        while(Read_Forward_Distance() > (first_distance - 300 + allowed_error)) { // -300 da ide za 30 cm unaprijed
+                Go_Forward(speed_and_direction);
+                // Serial.println(Read_Forward_Distance());
+        }
+        Stop_Robot();
+        // Serial.println("Go_Forward_30cm() function is called.");
+        }
+
+}
+
+void ROBOT_GIBANJE::Go_Back_30cm(int speed_and_direction ){
+
+        uint16_t first_distance = Read_Forward_Distance();
+
+        // Serial.println(first_distance);
+        uint16_t allowed_error = 0; // This number can be changed to achieve correct movement
+
+        Setpoint2 = Read_Heading();
+
+        if(Setpoint2<=180)    // da li se nalazi u 1. i 4. kvadrantu ili 2. i 3. kvadrantu
+              {
+                Margina2 = true;
+              }
+              else
+                Margina2 = false;
+
+        while(Read_Forward_Distance() < (first_distance + 300 - allowed_error)) {
+                Go_Back(speed_and_direction);
+                // Serial.println(Read_Forward_Distance());
+        }
+        Stop_Robot();
+        // Serial.println("Go_Back_30cm() function is called.");
+
+}
+
+float ROBOT_GIBANJE::Read_Heading(){
+
+        sensors_event_t event;
+        gyroscope.getEvent(&event);
+        return event.orientation.x;
+
+}
+
+// When going right angle is increasing from 0 to 360
+void ROBOT_GIBANJE::Go_Right_90degrees(int speed_and_direction ){ // Default speed for turning right is 30, when you don't send any value to function
+
+        uint16_t initial_heading = Read_Heading();
+        uint8_t allowed_error = 5; // This number can be changed to achieve precise turns
+        if(initial_heading < 270) {
+                while(Read_Heading() < (initial_heading + 90 - allowed_error)) {
+                        Go_Right(speed_and_direction);
+                }
+        }
+        else{
+                while((Read_Heading() <= 360) && (Read_Heading() >= 270)) {
+                        Go_Right(speed_and_direction);
+                }
+                while(Read_Heading() < (initial_heading - 270 - allowed_error)) {
+                        Go_Right(speed_and_direction);
+                }
+        }
+        Stop_Robot();
+        // Serial.println("Go_Right_90degrees() function is called.");
+
+}
+
+// When going left angle is decreasing from 360 to 0
+void ROBOT_GIBANJE::Go_Left_90degrees(int speed_and_direction ){ // Default speed for turning left is 30, when you don't send any value to function
+
+        uint16_t initial_heading = Read_Heading();
+        uint8_t allowed_error = 5; // This number can be changed to achieve precise turns
+        if(initial_heading > 90) {
+                while(Read_Heading() > (initial_heading - 90 + allowed_error)) {
+                        Go_Left(speed_and_direction);
+                }
+        }
+        else{
+                while((Read_Heading() >= 0) && (Read_Heading() <= 90)) {
+                        Go_Left(speed_and_direction);
+                }
+                while(Read_Heading() > (initial_heading + 270 + allowed_error)) {
+                        Go_Left(speed_and_direction);
+                }
+        }
+        Stop_Robot();
+        // Serial.println("Go_Left_90degrees() function is called.");
+
+}
+
+uint16_t ROBOT_GIBANJE::Read_Temperature(){
+
+        return map(analogRead(THERMAL_OUT_PIN), 0, 52851, -20, 100);
+
+}
+
+bool ROBOT_GIBANJE::Is_Wall_Left(){
+        if((Read_Left1_Distance()<300)&&(Read_Left2_Distance()<300)) return true;
+        else return false;
+}
+bool ROBOT_GIBANJE::Is_Wall_Right(){
+        if((Read_Right1_Distance()<300)&&(Read_Right2_Distance()<300)) return true;
+        else return false;
+}
+bool ROBOT_GIBANJE::Is_Wall_Forward(){
+        if(Read_Forward_Distance()<300) return true;
+        else return false;
+}
+bool ROBOT_GIBANJE::Is_Wall_Back(){
+        if(Read_Back_Distance()<300) return true;
+        else return false;
+}
+
+void ROBOT_GIBANJE::Push_Box(){
+        digitalWrite(ELECTROMAGNET_PIN1, LOW);
+        digitalWrite(ELECTROMAGNET_PIN2, HIGH);
+        delay(2000);
+        digitalWrite(ELECTROMAGNET_PIN1, LOW);
+        digitalWrite(ELECTROMAGNET_PIN2, LOW);
+}
+
+void error(String message) {    // error message za VL53L0XsAnalog
+
+        Serial.print(message);
+        while (true)
+                ;
+}

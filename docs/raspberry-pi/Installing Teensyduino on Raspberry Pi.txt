@@ -1,0 +1,36 @@
+
+### Install Teensy ###
+
+Must be directly (HDMI) connected to Raspberry
+
+git clone https://github.com/cmcmurrough/cse2100
+cd cse2100
+cd teensy/
+sudo sh install_teensyduino.sh
+
+### Second Way Official Website###
+Dowload Udev rules than run
+sudo cp 00-teensy.rules /etc/udev/rules.d/
+After Arduino Linux 32 installation run
+./TeensyduinoInstall.linux64
+If instalation error do next
+sudo cp /tmp/49-teensy.rules /etc/udev/rules.d
+
+
+### Uninstall app ###
+sudo apt-get remove arduino-core 
+
+sudo apt-get install arduino
+
+### Install Arduino ###
+
+Download from site Linux ARM 32 bit
+
+tar xf ~/Downloads/arduino-1.6.11-linux32.tar.xz -C ~/
+cd arduino1.6.11/
+sudo ./install.sh
+or just ./install.sh
+### Enable Teensy Serial Communication ###
+
+Download Linux Udev File from PRJC Teensyduino file
+Than run: sudo cp 00-teensy.rules /etc/udev/rules.d/

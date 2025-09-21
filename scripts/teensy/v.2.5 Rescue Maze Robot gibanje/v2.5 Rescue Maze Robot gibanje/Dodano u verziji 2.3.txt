@@ -1,0 +1,8 @@
+U Robot_Gibanje dodana biblioteka PID_v1_ Version 1.2.0
+* by Brett Beauregard
+u cpp fileu dodan objekt i par varijabli za pid biblioteku 
+u funkciju go_forward_30cm dodano ocitanje trenutnog položaja, i u ovisnosti nalazi li se pod kutem 0-180 salje true 
+  ako je pod kutem 180-360 salje false u varijablu Margine.
+
+u funkciju go_forward pozvana funkcija za ocitanje polozaja, i preracunava se radi problema oko 0 i 360 stupnjeva.
+   Pid kontrola racuna koliko se mora smanjit brzina motora da bi zadrzala pravac

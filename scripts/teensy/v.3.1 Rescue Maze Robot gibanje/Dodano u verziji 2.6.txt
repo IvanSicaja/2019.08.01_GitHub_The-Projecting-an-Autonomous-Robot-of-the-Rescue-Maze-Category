@@ -1,0 +1,4 @@
+-Izmjenjeni nazivi funkcija kako bi bili intuitivniji (npr. funkcija "Read_Back1_Distance()" dobila ja naziv "Read_Back_Left_Distance();" )
+-Također izmjenjni nazivi oderđenih varijabli kako bi bili intuitivniji (npr. varijabla "speed_and_orientation" preimenovana u "speed" jer pradstavlja samo brzinu)
+-Dodana funkcije:
+  -

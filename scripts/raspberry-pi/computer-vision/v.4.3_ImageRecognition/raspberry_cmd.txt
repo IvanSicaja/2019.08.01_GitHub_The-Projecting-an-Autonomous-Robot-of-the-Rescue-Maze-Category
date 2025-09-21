@@ -1,0 +1,10 @@
+Check storage: df -h
+Check ID for SSH: ifconfig
+Install Adruino IDE: sudo apt-get install arduino
+Chech Arduinoport: ls /dev/tty*
+Settings: sudo raspi-config
+Screen-shoot:scrot
+
+IP for SSH: WLAN0 --> inet -->10.0.1.224
+Name: pi
+Password: raspberry

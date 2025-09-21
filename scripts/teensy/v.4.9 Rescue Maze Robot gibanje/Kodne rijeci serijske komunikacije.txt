@@ -1,0 +1,5 @@
+TFND - Temperature victim founded
+HFND - H character recognised
+SFND - S character recognised
+UFND - U character recognised
+BFND - Black tile recognised
